@@ -1,0 +1,79 @@
+<div class="container main-container ">
+    <div class="row col-12">
+        <h2></h2>
+    </div>
+    <form [formGroup]="profileForm" (ngSubmit)="onFormSubmit()">
+        <div class="row pb-5">
+
+            <div class="row px-5 col-12">
+                <div class="col-2">
+                    <h6 class="">Imagen de Perfil:</h6>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-start align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="#D3D3D3" viewBox="0 0 16 16" *ngIf="!imgURL && !loadedImage">
+                                <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                                <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+
+                            <img class="img-fluid" [src]="imgURL" alt="" width="300" height="300" *ngIf="imgURL">
+                            <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage}}" alt="" width="300"
+                                 height="300" *ngIf="!imgURL"/>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                            <input [hidden]="true" class="form-control" formControlName="idAppUser"
+                                   [value]="user?.idAppUser">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row px-5 pt-3 col-12">
+                <div class="col-2">
+                    <h6 class="">Nombre:</h6>
+                </div>
+                <div class="col-10">
+                    <input [class.is-invalid]="!profileForm.get('name').valid && profileForm.get('name').touched"
+                           class="form-control" formControlName="name" [value]="user?.name">
+                </div>
+            </div>
+            <div class="row px-5 pt-3 col-12">
+                <div class="col-2">
+                    <h6 class="">Descripción:</h6>
+                </div>
+                <div class="col-10">
+                    <textarea [class.is-invalid]="!profileForm.get('description').valid && profileForm.get('description').touched"
+                              rows="4" class="form-control" formControlName="description" [value]="user?.description">
+                    </textarea>
+                </div>
+            </div>
+            <div class="row px-5 pt-3 col-12">
+                <div class="col-2">
+                    <h6 class="">Email:</h6>
+                </div>
+                <div class="col-10">
+                    <input [class.is-invalid]="!profileForm.get('email').valid && profileForm.get('email').touched"
+                            class="form-control" formControlName="email" [value]="user?.email">
+                </div>
+            </div>
+            <div class="row px-5 pt-3 col-12">
+                <div class="col-2">
+                    <h6 class="">Telefono:</h6>
+                </div>
+                <div class="col-10">
+                    <input class="form-control" formControlName="phone" [value]="user?.phone">
+                </div>
+            </div>
+
+            <div class="row px-5 pt-3 col-12 justify-content-center">
+                <button class="btn btn-primary-mej" type="submit" [disabled]="!profileForm.valid">
+                    Guardar
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>

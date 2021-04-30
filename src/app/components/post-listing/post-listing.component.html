@@ -1,0 +1,122 @@
+<div class="container main-container">
+    <div class="pb-5">
+        <div class="row pt-2 justify-content-center">
+            <div class="col-md-8 border pt-2">
+                <form class="form-inline justify-content-center" [formGroup]="searchForm"
+                      (ngSubmit)="onSearchFormSubmit()">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label class="form-label" style="width:75px;">Categorias</label>
+                        <select class="form-select form-control  mx-sm-3" aria-label="Default select example"
+                                formControlName="category">
+                            <option [ngValue]="null" selected>Todas</option>
+                            <option *ngFor="let category of categories" value={{category.idCategory}}>
+                                {{category.categoryName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label class="form-label" style="width:75px;">Ciudad</label>
+                        <select class="form-select form-control  mx-sm-3" formControlName="city">
+                            <option [ngValue]="null" selected>Todas</option>
+                            <option *ngFor="let city of cities" value={{city.idCity}}>
+                                {{city.cityName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <div class="form-group">
+                            <button class="btn btn-primary-mej" type="submit">Buscar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-3">
+                <div class="row ">
+                    <label class="form-label col-8 offset-2 text-center">Ordenar Por</label>
+                    <select class="col-8 offset-2" #orderingSelect
+                            (change)='onOrderSelect(orderingSelect.value)'>
+                        <option selected value="0" disabled>Seleccione</option>
+                        <option value="1">Mas Reciente</option>
+                        <option value="2">Mas Antiguo</option>
+                        <option value="3">Mejor Calificado</option>
+                        <option value="4">Menor Calificado</option>
+                    </select>
+                </div>
+                <div class="">
+                    <div class="row pt-4">
+                        <div class="col-12 text-center">
+                            <label class="form-label font-weight-bold">Ciudad</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 offset-2 text-center">
+                            <ul class="list-group">
+                                <li *ngFor="let city of filterCities"
+                                    class="d-flex justify-content-between align-items-center">
+                                    <div class="input-group-prepend">
+                                        <div class="">
+                                            <input type="checkbox" [value]="city.idCity"
+                                                   (change)="onCityFilterCheckClick($event)"
+                                                   [checked]="city.selected">
+                                        </div>
+                                    </div>
+                                    <div class="label font-weight-light">{{city.cityName}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row pt-4">
+                        <div class="col-12 text-center">
+                            <label class="form-label font-weight-bold">Categoria</label>
+                        </div>
+                    </div>
+                    <div class="row  pb-5">
+                        <div class="col-8 offset-2  text-center">
+                            <ul class="list-group">
+                                <li *ngFor="let category of filterCategories"
+                                    class="d-flex justify-content-between align-items-center">
+                                    <div class="input-group-prepend">
+                                        <div class="">
+                                            <input type="checkbox" [value]="category.idCategory"
+                                                   (change)="onCategoryFilterCheckClick($event)"
+                                                   [checked]="category.selected">
+                                        </div>
+                                    </div>
+                                    <div class="label font-weight-light">{{category.categoryName}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9" *ngIf="postsViews.length==0">
+                <div class="col-12 d-flex justify-content-center align-items-center pt-4" style="height:300px">
+                    <h1 class="text-center" style="font-size:30px; color:#D3D3D3">No hay resultados para su busqueda.</h1>
+                </div>
+            </div>
+            <div class="col-md-9" *ngIf="postsViews.length>0">
+                <div class="list-group">
+                    <app-post-card
+                            class="border"
+                            *ngFor="let postView of postsViews | paginate: {itemsPerPage: itemsPage, currentPage: page} | sort:[orderPostsField, orderPostsDirection]"
+                            [title]="postView?.title" [city]="postView?.city?.cityName" [category]="postView?.category?.categoryName"
+                            [user]="postView?.userView?.name" [date]="postView?.date"
+                            [ratingScore]="postView?.ratingView?.score"
+                            [ratingQuantity]="postView?.ratingView?.quantity"
+                            [idPost]="postView.idPost" [postImage]="postView?.mainPostImage?.image">
+
+                    </app-post-card>
+                </div>
+                <div class="text-center pt-3">
+                    <pagination-controls (pageChange)="page = $event"
+                                         previousLabel="Anterior"
+                                         nextLabel="Siguiente"
+                                         responsive="true"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

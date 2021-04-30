@@ -1,0 +1,43 @@
+<div class="py-5 main-container">
+    <div class="container pb-5 pt-5 border">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="text-center pt-5 pb-5">
+                    <h5>Realiza la busqueda de tu servicio aqui</h5>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <form [formGroup]="searchForm" (ngSubmit)="onFormSubmit()">
+                        <div class="mb-3">
+                            <label class="form-label">Categorias</label>
+                            <select class="form-select form-control" aria-label="Default select example"
+                                    formControlName="category">
+                                <option [ngValue]="null" selected>Todas</option>
+                                <option *ngFor="let category of categories" value={{category.idCategory}}>
+                                    {{category.categoryName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Ciudad</label>
+                            <select class="form-select form-control" formControlName="city">
+                                <option [ngValue]="null" selected>Todas</option>
+                                <option *ngFor="let city of cities" value={{city.idCity}}>
+                                    {{city.cityName}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary-mej" type="submit">Iniciar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <div class="row col-12">
+                    <img class="img-fluid" src="../../../assets/images/Home_Image1.jpg"
+                         alt="https://www.flickr.com/photos/byrawpixel/30849315227/">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

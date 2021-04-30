@@ -1,0 +1,51 @@
+<div class="py-5 main-container">
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Ingresar</h2>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="../../../assets/images/person-fill.svg"
+                                                                alt="Bootstrap" width="24" height="24"></span>
+                            </div>
+                            <input [class.is-invalid]="!loginForm.get('username').valid && loginForm.get('username').touched"
+                                   type="email" class="form-control" placeholder="email" formControlName="username">
+                            <div class="col-12">
+                                <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">Por favor ingrese un correo</span>
+                            </div>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="../../../assets/images/key-fill.svg"
+                                                                alt="Bootstrap" width="24" height="24"></span>
+                            </div>
+                            <input [class.is-invalid]="!loginForm.get('password').valid && loginForm.get('password').touched"
+                                   class="form-control" type="Password" placeholder="password"
+                                   formControlName="password">
+                            <div class="col-12">
+                                <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Por favor ingrese la Contraseña</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn float-md-none login_btn" type="submit" [disabled]="!loginForm.valid">
+                                Iniciar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center align-items-center links">
+                        No tienes una cuenta?
+                        <a class="nav-link" style="color:blue;" [routerLink]="['/register']">Registrarse</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

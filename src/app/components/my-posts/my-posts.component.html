@@ -1,0 +1,38 @@
+<div class="container main-container">
+    <div class="pb-5">
+        <div class="row pt-2 ">
+            <div class="row pt-2 col-md-6 justify-content-start pl-5">
+                <h4>Mis Publicaciones</h4>
+            </div>
+            <div class="row pt-2 col-md-6 justify-content-end pr-0">
+                <button class="btn btn-primary-mej" [routerLink]="['/create-post', this.idUser]">Crear Publicación</button>
+            </div>
+        </div>
+
+        <div class="row pt-3">
+            <div class="col-12" *ngIf="postsViews.length==0">
+                <div class="col-12 d-flex justify-content-center align-items-center pt-4" style="height:300px">
+                    <h1 class="text-center" style="font-size:30px; color:#D3D3D3">Usted no tiene ninguna publicación en este momento.</h1>
+                </div>
+            </div>
+            <div class="col-12" *ngIf="postsViews.length>0">
+                <div class="list-group">
+                    <app-my-post-card
+                            class="border"
+                            *ngFor="let postView of postsViews | paginate: {itemsPerPage: itemsPage, currentPage: page}"
+                            [title]="postView?.title" [date]="postView?.date"
+                            [idPost]="postView?.idPost" [idUser]="postView?.idUser"
+                            [postImage]="postView?.mainPostImage?.image">
+
+                    </app-my-post-card>
+                </div>
+                <div class="text-center pt-3">
+                    <pagination-controls (pageChange)="page = $event"
+                                         previousLabel="Anterior"
+                                         nextLabel="Siguiente"
+                                         responsive="true"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,136 @@
+<div class="container main-container ">
+    <div class="row col-12">
+        <h2></h2>
+    </div>
+
+    <div class="row pb-5">
+        <div class="col-md-2">
+            <div class="row">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="row col-12">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" fill="#D3D3D3" viewBox="0 0 16 16" *ngIf="!this.profileView?.image">
+                            <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                            <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        <img class="img-fluid" src="{{'data:image/png;base64,'+this.profileView?.image}}" alt="" width="300"
+                             height="300"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 offset-1">
+            <div class="px-3">
+                <div class="container pt-3">
+                    <div class="row">
+                        <h4 class="px-3">{{profileView?.name}}</h4>
+                    </div>
+                    <div class="row pt-3">
+                        <p class="col-12">{{profileView?.description}}
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="px-3">
+                            <p class="pt-2">Email: {{profileView?.email}}</p>
+                            <p class="pt-2">Telefono: {{profileView?.phone}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row px-3">
+                                <h6>Opiniones de los usuarios</h6>
+                            </div>
+
+                            <div class="row px-3">
+                                <span *ngFor="let score of scores">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="orange"
+                                         viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </span>
+                                <span *ngFor="let negativeScore of negativeScores">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
+                                         viewBox="0 0 16 16">
+                                      <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                </span>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;[{{profileView?.ratingView.quantity}} Opiniones]</p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 d-flex justify-content-end align-items-baseline" *ngIf="isValidUser">
+                            <button type="button" class="btn btn-primary-mej" data-toggle="modal"
+                                    data-target="#exampleModal" data-whatever="@mdo">Calificar
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="list-group pt-3">
+                            <app-rating-detail class="pt-3"
+                                               *ngFor="let rating of profileView?.ratingList | paginate: {itemsPerPage: itemsPage, currentPage: page}"
+                                               [userId]="rating.qualifierRatingUserView.idAppUser"
+                                               [userName]="rating.qualifierRatingUserView.name"
+                                               [comment]="rating.comment" [score]="rating.score"
+                                               [date]="rating.date">
+                            </app-rating-detail>
+                        </div>
+                        <div class="text-center pt-3">
+                            <pagination-controls (pageChange)="page = $event"
+                                                 previousLabel="Anterior"
+                                                 nextLabel="Siguiente"
+                                                 responsive="true"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addComment" (ngSubmit)="onFormAddCommentSubmit()">
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Calificación:</label>
+                            <div>
+                                <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)">
+                                    <ng-container *ngIf="star; else noStar">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="orange"
+                                             viewBox="0 0 16 16">
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>
+                                    </ng-container>
+                                    <ng-template #noStar>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
+                                             viewBox="0 0 16 16">
+                                            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                        </svg>
+                                    </ng-template>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">Comentario:</label>
+                            <textarea class="form-control" id="message-text" formControlName="comment"></textarea>
+                            <input [hidden]="true" class="form-control" formControlName="idUser">
+                            <input [hidden]="true" class="form-control" formControlName="idQualifierUser">
+                            <input [hidden]="true" class="form-control" formControlName="score">
+                            <input [hidden]="true" class="form-control" formControlName="date">
+                        </div>
+                        <div class="modal-footer">
+                            <button #closeModalButton type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary-mej" type="submit" [disabled]="!addComment.valid">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
