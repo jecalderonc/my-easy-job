@@ -24,7 +24,7 @@
                                                                 alt="Bootstrap" width="24" height="24"></span>
                             </div>
                             <input [class.is-invalid]="!loginForm.get('password').valid && loginForm.get('password').touched"
-                                   class="form-control" type="Password" placeholder="password"
+                                   class="form-control" type="Password" placeholder="contraseña"
                                    formControlName="password">
                             <div class="col-12">
                                 <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">Por favor ingrese la Contraseña</span>

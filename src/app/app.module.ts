@@ -23,43 +23,44 @@ import {EditProfileComponent} from './components/edit-profile/edit-profile.compo
 import {EditPostComponent} from './components/edit-post/edit-post.component';
 import {MyPostsComponent} from './components/my-posts/my-posts.component';
 import {MyPostCardComponent} from './components/my-post-card/my-post-card.component';
-import { ErrorPageComponent } from './components/error-page/error-page.component';
+import {ErrorPageComponent} from './components/error-page/error-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent,
-    NotFoundComponent,
-    HeaderComponent,
-    FooterComponent,
-    PostListingComponent,
-    PostCardComponent,
-    SortPipe,
-    PostDetailsComponent,
-    ProfileComponent,
-    RatingDetailComponent,
-    EditProfileComponent,
-    EditPostComponent,
-    MyPostsComponent,
-    MyPostCardComponent,
-    ErrorPageComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgxPaginationModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent,
+        NotFoundComponent,
+        HeaderComponent,
+        FooterComponent,
+        PostListingComponent,
+        PostCardComponent,
+        SortPipe,
+        PostDetailsComponent,
+        ProfileComponent,
+        RatingDetailComponent,
+        EditProfileComponent,
+        EditPostComponent,
+        MyPostsComponent,
+        MyPostCardComponent,
+        ErrorPageComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        NgxPaginationModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -5,21 +5,21 @@
                 <form class="form-inline justify-content-center" [formGroup]="searchForm"
                       (ngSubmit)="onSearchFormSubmit()">
                     <div class="form-group mx-sm-3 mb-2">
-                        <label class="form-label" style="width:75px;">Categorias</label>
-                        <select class="form-select form-control  mx-sm-3" aria-label="Default select example"
-                                formControlName="category">
-                            <option [ngValue]="null" selected>Todas</option>
-                            <option *ngFor="let category of categories" value={{category.idCategory}}>
-                                {{category.categoryName}}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
                         <label class="form-label" style="width:75px;">Ciudad</label>
                         <select class="form-select form-control  mx-sm-3" formControlName="city">
                             <option [ngValue]="null" selected>Todas</option>
                             <option *ngFor="let city of cities" value={{city.idCity}}>
                                 {{city.cityName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label class="form-label" style="width:75px;">Categoria</label>
+                        <select class="form-select form-control  mx-sm-3" aria-label="Default select example"
+                                formControlName="category">
+                            <option [ngValue]="null" selected>Todas</option>
+                            <option *ngFor="let category of categories" value={{category.idCategory}}>
+                                {{category.categoryName}}
                             </option>
                         </select>
                     </div>
@@ -94,7 +94,8 @@
 
             <div class="col-md-9" *ngIf="postsViews.length==0">
                 <div class="col-12 d-flex justify-content-center align-items-center pt-4" style="height:300px">
-                    <h1 class="text-center" style="font-size:30px; color:#D3D3D3">No hay resultados para su busqueda.</h1>
+                    <h1 class="text-center" style="font-size:30px; color:#D3D3D3">No hay resultados para su
+                        busqueda.</h1>
                 </div>
             </div>
             <div class="col-md-9" *ngIf="postsViews.length>0">
@@ -102,7 +103,8 @@
                     <app-post-card
                             class="border"
                             *ngFor="let postView of postsViews | paginate: {itemsPerPage: itemsPage, currentPage: page} | sort:[orderPostsField, orderPostsDirection]"
-                            [title]="postView?.title" [city]="postView?.city?.cityName" [category]="postView?.category?.categoryName"
+                            [title]="postView?.title" [city]="postView?.city?.cityName"
+                            [category]="postView?.category?.categoryName"
                             [user]="postView?.userView?.name" [date]="postView?.date"
                             [ratingScore]="postView?.ratingView?.score"
                             [ratingQuantity]="postView?.ratingView?.quantity"

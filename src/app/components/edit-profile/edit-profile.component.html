@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-10">
                     <input [class.is-invalid]="!profileForm.get('email').valid && profileForm.get('email').touched"
-                            class="form-control" formControlName="email" [value]="user?.email">
+                            class="form-control" formControlName="email" [value]="user?.email" disabled>
                 </div>
             </div>
             <div class="row px-5 pt-3 col-12">

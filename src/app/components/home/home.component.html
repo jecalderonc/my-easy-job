@@ -7,22 +7,22 @@
                 </div>
                 <div class="col-md-8 offset-md-2">
                     <form [formGroup]="searchForm" (ngSubmit)="onFormSubmit()">
+                      <div class="mb-3">
+                        <label class="form-label">Ciudad</label>
+                        <select class="form-select form-control" formControlName="city">
+                          <option [ngValue]="null" selected>Todas</option>
+                          <option *ngFor="let city of cities" value={{city.idCity}}>
+                            {{city.cityName}}
+                          </option>
+                        </select>
+                      </div>
                         <div class="mb-3">
-                            <label class="form-label">Categorias</label>
+                            <label class="form-label">Categoria</label>
                             <select class="form-select form-control" aria-label="Default select example"
                                     formControlName="category">
                                 <option [ngValue]="null" selected>Todas</option>
                                 <option *ngFor="let category of categories" value={{category.idCategory}}>
                                     {{category.categoryName}}
-                                </option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Ciudad</label>
-                            <select class="form-select form-control" formControlName="city">
-                                <option [ngValue]="null" selected>Todas</option>
-                                <option *ngFor="let city of cities" value={{city.idCity}}>
-                                    {{city.cityName}}
                                 </option>
                             </select>
                         </div>

@@ -16,7 +16,7 @@
                         </div>
                         <div class="input-group form-group">
                             <input [class.is-invalid]="!registerForm.get('password').valid && registerForm.get('password').touched"
-                                   class="form-control" type="Password" placeholder="Contraseña"
+                                   class="form-control" type="Password" placeholder="contraseña"
                                    formControlName="password">
                             <div class="col-12">
                                 <span *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">Por favor ingrese la Contraseña</span>
@@ -24,7 +24,7 @@
                         </div>
                         <div class="input-group form-group">
                             <input [class.is-invalid]="!registerForm.get('name').valid && registerForm.get('name').touched"
-                                   class="form-control" placeholder="Nombres" formControlName="name">
+                                   class="form-control" placeholder="nombres" formControlName="name">
                             <div class="col-12">
                                 <span *ngIf="!registerForm.get('name').valid && registerForm.get('name').touched">Por favor ingrese un nombre</span>
                             </div>
