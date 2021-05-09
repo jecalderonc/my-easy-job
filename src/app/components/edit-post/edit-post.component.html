@@ -75,7 +75,7 @@
                                 <img class="img-fluid" [src]="imgURL1" alt="" width="300" height="300" *ngIf="imgURL1">
                                 <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage1}}" alt=""
                                      width="300"
-                                     height="300" *ngIf="!imgURL1"/>
+                                     height="300" *ngIf="!imgURL1 && loadedImage1"/>
                             </div>
                             <div class="row pt-2 pb-2 d-flex justify-content-center align-items-center">
                                 <input type="file" accept="image/*" (change)="onSelectFile($event, 1)">
@@ -91,7 +91,7 @@
                                 <img class="img-fluid" [src]="imgURL2" alt="" width="300" height="300" *ngIf="imgURL2">
                                 <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage2}}" alt=""
                                      width="300"
-                                     height="300" *ngIf="!imgURL2"/>
+                                     height="300" *ngIf="!imgURL2 && loadedImage2"/>
                             </div>
                             <div class="row pt-2 pb-2 d-flex justify-content-center align-items-center">
                                 <input type="file" accept="image/*" (change)="onSelectFile($event, 2)">
@@ -109,7 +109,7 @@
                                 <img class="img-fluid" [src]="imgURL3" alt="" width="300" height="300" *ngIf="imgURL3">
                                 <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage3}}" alt=""
                                      width="300"
-                                     height="300" *ngIf="!imgURL3"/>
+                                     height="300" *ngIf="!imgURL3 && loadedImage3"/>
                             </div>
                             <div class="row pt-2 pb-2 d-flex justify-content-center align-items-center">
                                 <input type="file" accept="image/*" (change)="onSelectFile($event, 3)">
@@ -125,7 +125,7 @@
                                 <img class="img-fluid" [src]="imgURL4" alt="" width="300" height="300" *ngIf="imgURL4">
                                 <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage4}}" alt=""
                                      width="300"
-                                     height="300" *ngIf="!imgURL4"/>
+                                     height="300" *ngIf="!imgURL4 && loadedImage4"/>
                             </div>
                             <div class="row pt-2 pb-2 d-flex justify-content-center align-items-center">
                                 <input type="file" accept="image/*" (change)="onSelectFile($event, 4)">

@@ -19,7 +19,7 @@
 
                             <img class="img-fluid" [src]="imgURL" alt="" width="300" height="300" *ngIf="imgURL">
                             <img class="img-fluid" src="{{'data:image/png;base64,'+this.loadedImage}}" alt="" width="300"
-                                 height="300" *ngIf="!imgURL"/>
+                                 height="300" *ngIf="!imgURL && loadedImage"/>
                         </div>
                     </div>
                     <div class="row pt-2">
