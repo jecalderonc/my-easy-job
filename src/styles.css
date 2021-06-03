@@ -39,3 +39,33 @@ main {
     background-color: #FFC312;
     border-color: #FFC312;
 }
+
+.upload-img-container {
+    max-height: 200px
+}
+
+.upload-img-container .img-responsive {
+    display: block;
+    width: auto;
+    max-height: 100%;
+}
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}
+
+.carousel-inner .carousel-item{
+    height:400px;
+    background-size:cover;
+    background-position: center center;
+}
+
+@media screen and (max-height: 650px) {
+    .carousel-inner .carousel-item{
+        height:200px;
+        background-size:cover;
+        background-position: center center;
+    }
+}
+

@@ -20,6 +20,7 @@ export class EditProfileComponent implements OnInit {
     idUser = 0;
     user: UserView;
     profileForm: FormGroup;
+    readMode = true;
 
     // File upload fields
     imgURL: any;
@@ -43,17 +44,7 @@ export class EditProfileComponent implements OnInit {
 
         this.idUser = this.getCurrentUser();
         // If the idUser field is correct ehe page load the information od the user.
-        if (this.idUser > 0) {
-            this.myEasyJobSvc.getUserViewByUser(this.idUser)
-                .subscribe((res: any) => {
-                    console.log(res);
-                    this.user = res;
-                    this.loadedImage = res.image;
-                    this.initializeEditMode();
-                }, (err: any) => {
-                    console.log(err);
-                });
-        }
+        this.changeReadMode();
     }
 
     /**
@@ -138,5 +129,35 @@ export class EditProfileComponent implements OnInit {
                 this.imgURL = reader.result;
             };
         }
+    }
+
+    /**
+     * Reload and disable the profile form when canceling the edition of the profile without saving.
+     */
+    changeReadMode(): void {
+        if (this.idUser > 0) {
+            this.myEasyJobSvc.getUserViewByUser(this.idUser)
+                .subscribe((res: any) => {
+                    console.log(res);
+                    this.user = res;
+                    this.loadedImage = res.image;
+                    this.imgURL = null;
+                    this.userFile = null;
+                    this.profileForm.disable();
+                    this.readMode = true;
+                    this.initializeEditMode();
+                }, (err: any) => {
+                    console.log(err);
+                });
+        }
+    }
+
+    /**
+     * Enable the form to edit the profile and save it.
+     */
+    changeEditMode(): void {
+        this.readMode = false;
+        this.profileForm.enable();
+        this.profileForm.controls['email'].disable();
     }
 }

@@ -150,7 +150,7 @@ export class PostListingComponent implements OnInit {
                 const cit = cities[index];
                 cit.selected = true;
                 cities[index] = cit;
-            } else if (this.city !== '')  {
+            } else if (this.city !== '') {
                 const addIndex = this.cities.map(function(e) {
                     return e.idCity;
                 }).indexOf(Number(this.city));
@@ -215,9 +215,20 @@ export class PostListingComponent implements OnInit {
         // Set the fields according to the last search and reload the components.
         this.city = citySelected;
         this.category = categorySelected;
+        this.clearPreviousSearch();
         this.getCitiesAndCategoriesAndCheckedFilters();
         this.getPosts(citySelected, categorySelected);
         this.updateCheckedFilters();
+    }
+
+    /**
+     * Clear all the fields related to the search of the posts.
+     */
+    clearPreviousSearch(): void{
+        this.filterCategories = [];
+        this.filterCities = [];
+        this.checkedFilterCities = new Array<string>();
+        this.checkedFilterCategories = new Array<string>();
     }
 
     /**
@@ -234,7 +245,7 @@ export class PostListingComponent implements OnInit {
         } else {
             if (index > -1) {
                 this.checkedFilterCities.splice(index, 1);
-                if (this.manuallyAddedCity && (e.target.value == this.city)){
+                if (this.manuallyAddedCity && (e.target.value == this.city)) {
                     this.city = '';
                     const removeIndex = this.filterCities.map(function(e) {
                         return e.idCity;
@@ -262,7 +273,7 @@ export class PostListingComponent implements OnInit {
         } else {
             if (index > -1) {
                 this.checkedFilterCategories.splice(index, 1);
-                if (this.manuallyAddedCategory && (e.target.value == this.category)){
+                if (this.manuallyAddedCategory && (e.target.value == this.category)) {
                     this.category = '';
                     const removeIndex = this.filterCategories.map(function(e) {
                         return e.idCategory;

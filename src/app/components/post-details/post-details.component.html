@@ -11,11 +11,11 @@
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel"
                              *ngIf="this.isThereImage">
                             <div class="carousel-inner">
-                                <div class="carousel-item"
+                                <div class="carousel-item text-center"
                                      [ngClass]="{'active': image.priority==1}"
                                      *ngFor="let image of postView?.postImageList">
-                                    <img src="{{'data:image/png;base64,'+image.image}}" class=""
-                                         alt="..." height="400">
+                                    <img src="{{'data:image/png;base64,'+image.image}}" class="d-block img-fluid"
+                                         alt="..." height="400" >
                                 </div>
                             </div>
                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
